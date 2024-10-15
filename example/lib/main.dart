@@ -35,7 +35,15 @@ class MyHomePageState extends State<MyHomePage> {
   String? _selectedFruit;
   List<Country> _selectedCountries = [];
 
-  final List<String> _fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape'];
+  final List<String> _fruits = [
+    'Apple',
+    'Banana',
+    'Cherry',
+    'Date',
+    'Elderberry',
+    'Fig',
+    'Grape'
+  ];
 
   final List<Country> _countries = [
     Country(name: 'United States', code: 'US', population: 331002651),

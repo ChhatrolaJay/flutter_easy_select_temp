@@ -51,8 +51,9 @@ class _SingleSelectWidgetState<T> extends State<SingleSelectWidget<T>> {
   /// inorder to show selected item at top.
   List<T> _getOrderedItems() {
     if (_selectedItem != null) {
-      final itemIndex = widget.items.indexWhere(
-          (item) => widget.searchProperty(item) == widget.searchProperty(_selectedItem as T));
+      final itemIndex = widget.items.indexWhere((item) =>
+          widget.searchProperty(item) ==
+          widget.searchProperty(_selectedItem as T));
       if (itemIndex != -1) {
         final orderedList = List<T>.from(widget.items);
         orderedList.removeAt(itemIndex);
@@ -77,7 +78,8 @@ class _SingleSelectWidgetState<T> extends State<SingleSelectWidget<T>> {
                   controller: _textController,
                   focusNode: _focusNode,
                   decoration: widget.fieldDecoration ??
-                      const InputDecoration(border: OutlineInputBorder(), labelText: 'Search'),
+                      const InputDecoration(
+                          border: OutlineInputBorder(), labelText: 'Search'),
                   onChanged: (value) {
                     setState(() {
                       _searchQuery = value;
@@ -106,7 +108,8 @@ class _SingleSelectWidgetState<T> extends State<SingleSelectWidget<T>> {
                   ))
                 : Expanded(
                     child: ListView.builder(
-                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       itemCount: _filteredItems.length,
                       itemBuilder: (context, index) {
                         final item = _filteredItems[index];

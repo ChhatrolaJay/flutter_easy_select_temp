@@ -44,8 +44,9 @@ class _MultiSelectWidgetState<T> extends State<MultiSelectWidget<T>> {
   @override
   void initState() {
     super.initState();
-    _selectedItemIds = Set<String>.from(
-        widget.initialSelectedItems?.map((item) => widget.itemIdentifier(item)) ?? []);
+    _selectedItemIds = Set<String>.from(widget.initialSelectedItems
+            ?.map((item) => widget.itemIdentifier(item)) ??
+        []);
     isSearchEnable = widget.isSearchEnable;
     title = widget.title;
     _sortedItems = _getSortedItems();
@@ -61,9 +62,12 @@ class _MultiSelectWidgetState<T> extends State<MultiSelectWidget<T>> {
           children: [
             BaseBottomSheetHeader(title: title),
             if (isSearchEnable) _buildSearchBar(),
-            if (widget.enableFreeText && _searchQuery.isNotEmpty) _buildFreeTextOption(),
+            if (widget.enableFreeText && _searchQuery.isNotEmpty)
+              _buildFreeTextOption(),
             Expanded(
-              child: _filteredItems.isEmpty ? _buildEmptyState() : _buildCheckboxList(),
+              child: _filteredItems.isEmpty
+                  ? _buildEmptyState()
+                  : _buildCheckboxList(),
             ),
           ],
         ),
@@ -79,7 +83,8 @@ class _MultiSelectWidgetState<T> extends State<MultiSelectWidget<T>> {
         controller: _textController,
         focusNode: _focusNode,
         decoration: widget.fieldDecoration ??
-            const InputDecoration(border: OutlineInputBorder(), labelText: 'Search'),
+            const InputDecoration(
+                border: OutlineInputBorder(), labelText: 'Search'),
         onChanged: (value) {
           setState(() {
             _searchQuery = value;
@@ -144,11 +149,13 @@ class _MultiSelectWidgetState<T> extends State<MultiSelectWidget<T>> {
 
   List<T> _getSortedItems() {
     final initialSelectedItems = widget.initialSelectedItems ?? [];
-    final initialSelectedIds = initialSelectedItems.map(widget.itemIdentifier).toSet();
+    final initialSelectedIds =
+        initialSelectedItems.map(widget.itemIdentifier).toSet();
 
     return [
       ...initialSelectedItems,
-      ...widget.items.where((item) => !initialSelectedIds.contains(widget.itemIdentifier(item)))
+      ...widget.items.where(
+          (item) => !initialSelectedIds.contains(widget.itemIdentifier(item)))
     ];
   }
 
@@ -157,7 +164,8 @@ class _MultiSelectWidgetState<T> extends State<MultiSelectWidget<T>> {
       Navigator.pop(context, _searchQuery);
     } else {
       final selectedItems = widget.items
-          .where((item) => _selectedItemIds.contains(widget.itemIdentifier(item)))
+          .where(
+              (item) => _selectedItemIds.contains(widget.itemIdentifier(item)))
           .toList();
       Navigator.pop(context, selectedItems);
     }
